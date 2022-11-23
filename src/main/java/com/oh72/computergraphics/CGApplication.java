@@ -13,7 +13,7 @@ public class CGApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(CGApplication.class.getResource("pick-fractal-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(CGApplication.class.getResource("color-scheme-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), WINDOW_WIDTH, WINDOW_HEIGHT);
         stage.setTitle("Computer Graphics");
         stage.setScene(scene);

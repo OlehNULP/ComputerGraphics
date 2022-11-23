@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<AnchorPane prefHeight="758.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/11.0.14-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oh72.computergraphics.ColorSchemeController">
+    <children>
+        <AnchorPane prefHeight="58.0" prefWidth="1080.0">
+            <children>
+                <GridPane alignment="CENTER" layoutX="762.0" layoutY="4.0" prefHeight="50.0" prefWidth="318.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <Button fx:id="btnHelp" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0"
+                                prefWidth="50.0" text="?" textAlignment="CENTER" GridPane.columnIndex="2"
+                                GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <GridPane.margin>
+                                <Insets/>
+                            </GridPane.margin>
+                        </Button>
+                        <Button fx:id="btnBack" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0"
+                                prefWidth="50.0" text="Back" textAlignment="CENTER" GridPane.halignment="CENTER"
+                                GridPane.valignment="CENTER">
+                            <GridPane.margin>
+                                <Insets/>
+                            </GridPane.margin>
+                        </Button>
+                        <Button fx:id="btnHome" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0"
+                                prefWidth="50.0" text="Home" textAlignment="CENTER" GridPane.columnIndex="1"
+                                GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <GridPane.margin>
+                                <Insets/>
+                            </GridPane.margin>
+                        </Button>
+                    </children>
+                    <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0"/>
+                    </padding>
+                </GridPane>
+                <Label layoutX="14.0" layoutY="18.0" text="RGB &amp; HSL"/>
+            </children>
+        </AnchorPane>
+        <SplitPane dividerPositions="0.11053837342497136" layoutY="58.0" orientation="VERTICAL" prefHeight="700.0"
+                   prefWidth="1080.0">
+            <items>
+                <AnchorPane minHeight="0.0" prefWidth="493.0">
+                    <children>
+                        <Button fx:id="btnUpload" layoutX="14.0" layoutY="13.0" mnemonicParsing="false"
+                                prefHeight="42.0" prefWidth="120.0" text="Upload"/>
+                        <Label layoutX="493.0" layoutY="14.0" text="Red Component"/>
+                        <Button fx:id="btnDownload" layoutX="924.0" layoutY="13.0" mnemonicParsing="false"
+                                prefHeight="42.0" prefWidth="120.0" text="Download"/>
+                        <Button fx:id="btnConvert" layoutX="268.0" layoutY="13.0" mnemonicParsing="false"
+                                prefHeight="42.0" prefWidth="120.0" text="RGB -&gt; HSL"/>
+                        <Slider fx:id="sliderComponent" layoutX="493.0" layoutY="38.0"/>
+                        <Button fx:id="btnSubmit" layoutX="633.0" layoutY="13.0" mnemonicParsing="false"
+                                prefHeight="42.0" prefWidth="120.0" text="Submit"/>
+                    </children>
+                </AnchorPane>
+                <AnchorPane minWidth="-Infinity" prefWidth="1080.0" SplitPane.resizableWithParent="false">
+                    <children>
+                        <Canvas fx:id="canvas" height="500.0" layoutX="410.0" width="670.0"/>
+                        <ImageView fx:id="imageView" fitHeight="400.0" fitWidth="400.0" layoutX="6.0"
+                                   pickOnBounds="true" preserveRatio="true"/>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>

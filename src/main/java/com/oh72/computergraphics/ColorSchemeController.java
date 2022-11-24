@@ -4,6 +4,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -102,7 +103,7 @@ public class ColorSchemeController {
             List<PixelRGB> row = new ArrayList<>();
 
             for (int j = 0; j < image.getWidth(); j++) {
-                Color color = image.getPixelReader().getColor(i, j);
+                Color color = image.getPixelReader().getColor(j, i);
                 row.add(new PixelRGB(color.getRed() * 255, color.getGreen() * 255, color.getBlue() * 255));
             }
 
@@ -151,7 +152,17 @@ public class ColorSchemeController {
 
         if (file != null) {
             try {
-                image = new Image(new FileInputStream(file));
+                Image newImage = new Image(new FileInputStream(file));
+
+                if (newImage.getWidth() > 600 || newImage.getHeight() > 600) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("Image max size is (600x600)");
+                    alert.show();
+
+                    throw new RuntimeException();
+                }
+
+                image = newImage;
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -166,7 +177,7 @@ public class ColorSchemeController {
                 PixelRGB pixelRGB = pixels.get(i).get(j);
 
                 g.setFill(new Color(pixelRGB.getRed() / 255, pixelRGB.getGreen() / 255, pixelRGB.getBlue() / 255, 1));
-                g.fillRect(i + 1, j + 1, i + 1, j + 1);
+                g.fillRect(j + 1, i + 1, j + 1, i + 1);
             }
         }
 
@@ -177,7 +188,7 @@ public class ColorSchemeController {
     }
 
     public void convert() {
-        PixelHSL[][] hslPixels = new PixelHSL[(int) image.getWidth()][(int) image.getHeight()];
+        PixelHSL[][] hslPixels = new PixelHSL[(int) image.getHeight()][(int) image.getWidth()];
 
         for (int i = 0; i < image.getHeight(); i++) {
             for (int j = 0; j < image.getWidth(); j++) {
@@ -242,6 +253,10 @@ public class ColorSchemeController {
         double g;
         double b;
 
+        if (h > 360) {
+            System.out.println();
+        }
+
         if (h >= 0 && h < 60) {
             r = c;
             g = x;
@@ -271,6 +286,10 @@ public class ColorSchemeController {
         r = (r + m) * 255;
         g = (g + m) * 255;
         b = (b + m) * 255;
+
+        r = Math.max(Math.min(r, 255), 0);
+        g = Math.max(Math.min(g, 255), 0);
+        b = Math.max(Math.min(b, 255), 0);
 
         return new PixelRGB(r, g, b);
     }

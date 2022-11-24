@@ -17,6 +17,7 @@ public class CGApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), WINDOW_WIDTH, WINDOW_HEIGHT);
         stage.setTitle("Computer Graphics");
         stage.setScene(scene);
+        stage.setResizable(Boolean.FALSE);
         stage.show();
     }
 

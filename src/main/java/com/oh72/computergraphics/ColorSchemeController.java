@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.awt.image.RenderedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +48,11 @@ public class ColorSchemeController {
     private ImageView imageView;
     @FXML
     private Slider sliderComponent;
+    @FXML
+    private Label redness;
+    @FXML
+    private Button btnUpdate;
+
     private Image image;
     private List<List<PixelRGB>> pixels;
 
@@ -53,19 +60,42 @@ public class ColorSchemeController {
     public void initialize() {
         image = new Image("default_image.png");
         imageView.setImage(image);
-        newImagePixels(imageView.getImage());
+        recalculatePixels();
 
-        sliderComponent.setMin(0);
-        sliderComponent.setMax(100);
+        sliderComponent.setValue(0);
+        sliderComponent.setMin(-50);
+        sliderComponent.setMax(50);
+
+        sliderComponent.setOnMouseDragged(mouseEvent -> redness.setText(String.valueOf(((int) sliderComponent.getValue()))));
+        sliderComponent.setOnMouseReleased(mouseEvent -> redness.setText(String.valueOf(((int) sliderComponent.getValue()))));
 
         btnConvert.setOnMouseReleased(mouseEvent -> {
             convert();
             draw();
         });
+
         btnDownload.setOnAction(actionEvent -> download());
+
+        btnSubmit.setOnMouseReleased(mouseEvent -> {
+            setBrightness();
+            draw();
+        });
+
+        btnUpload.setOnMouseReleased(mouseEvent -> {
+            upload();
+            imageView.setImage(image);
+            recalculatePixels();
+        });
+
+        btnUpdate.setOnMouseReleased(mouseEvent -> {
+            recalculatePixels();
+            draw();
+        });
+
+        draw();
     }
 
-    public void newImagePixels(Image image) {
+    public void recalculatePixels() {
         pixels = new ArrayList<>();
 
         for (int i = 0; i < image.getHeight(); i++) {
@@ -80,12 +110,27 @@ public class ColorSchemeController {
         }
     }
 
+    public void setBrightness() {
+        for (int i = 0; i < image.getHeight(); i++) {
+            for (int j = 0; j < image.getWidth(); j++) {
+                PixelHSL pixelHSL = rgbToHsl(pixels.get(i).get(j));
+                double h = pixelHSL.getHue();
+
+                if ((h >= 0 && h <= 30) || (h >= 330 && h <= 360)) {
+                    pixelHSL.setLightness(Math.max(0, Math.min(100, pixelHSL.getLightness() + sliderComponent.getValue())));
+                }
+
+                pixels.get(i).set(j, hslToRgb(pixelHSL));
+
+            }
+        }
+    }
+
     public void download() {
         FileChooser saveFile = new FileChooser();
         saveFile.setTitle("Save File");
-
         File file = saveFile.showSaveDialog(new Stage());
-        System.out.println("is file null ? " + file);
+
         if (file != null) {
             try {
                 WritableImage writableImage = new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight());
@@ -94,7 +139,21 @@ public class ColorSchemeController {
                 ImageIO.write(renderedImage, "png", file);
             } catch (IOException ex) {
                 ex.printStackTrace();
-                System.out.println("Error!");
+            }
+        }
+    }
+
+    public void upload() {
+        FileChooser openFile = new FileChooser();
+        openFile.setTitle("Open File");
+
+        File file = openFile.showSaveDialog(new Stage());
+
+        if (file != null) {
+            try {
+                image = new Image(new FileInputStream(file));
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
         }
     }
@@ -105,6 +164,7 @@ public class ColorSchemeController {
         for (int i = 0; i < image.getHeight(); i++) {
             for (int j = 0; j < image.getWidth(); j++) {
                 PixelRGB pixelRGB = pixels.get(i).get(j);
+
                 g.setFill(new Color(pixelRGB.getRed() / 255, pixelRGB.getGreen() / 255, pixelRGB.getBlue() / 255, 1));
                 g.fillRect(i + 1, j + 1, i + 1, j + 1);
             }

@@ -56,14 +56,17 @@
                     <children>
                         <Button fx:id="btnUpload" layoutX="14.0" layoutY="13.0" mnemonicParsing="false"
                                 prefHeight="42.0" prefWidth="120.0" text="Upload"/>
-                        <Label layoutX="493.0" layoutY="14.0" text="Red Component"/>
+                        <Label layoutX="487.0" layoutY="14.0" text="Red Component"/>
                         <Button fx:id="btnDownload" layoutX="924.0" layoutY="13.0" mnemonicParsing="false"
                                 prefHeight="42.0" prefWidth="120.0" text="Download"/>
-                        <Button fx:id="btnConvert" layoutX="268.0" layoutY="13.0" mnemonicParsing="false"
+                        <Button fx:id="btnConvert" layoutX="323.0" layoutY="13.0" mnemonicParsing="false"
                                 prefHeight="42.0" prefWidth="120.0" text="RGB -&gt; HSL"/>
-                        <Slider fx:id="sliderComponent" layoutX="493.0" layoutY="38.0"/>
+                        <Slider fx:id="sliderComponent" layoutX="487.0" layoutY="38.0"/>
                         <Button fx:id="btnSubmit" layoutX="633.0" layoutY="13.0" mnemonicParsing="false"
                                 prefHeight="42.0" prefWidth="120.0" text="Submit"/>
+                        <Label fx:id="redness" layoutX="595.0" layoutY="14.0" text="0"/>
+                        <Button fx:id="btnUpdate" layoutX="166.0" layoutY="13.0" mnemonicParsing="false"
+                                prefHeight="42.0" prefWidth="120.0" text="Update"/>
                     </children>
                 </AnchorPane>
                 <AnchorPane minWidth="-Infinity" prefWidth="1080.0" SplitPane.resizableWithParent="false">

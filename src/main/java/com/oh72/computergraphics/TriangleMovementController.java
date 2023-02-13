@@ -19,8 +19,6 @@ import java.util.Arrays;
  **/
 public class TriangleMovementController {
     @FXML
-    private Button btnBack;
-    @FXML
     private Button btnHome;
     @FXML
     private Button btnHelp;
@@ -60,6 +58,8 @@ public class TriangleMovementController {
 
     @FXML
     public void initialize() {
+        btnHome.setOnMouseReleased(MainMenuController.HOME);
+
         spnX.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(-(int) canvas.getWidth(), (int) canvas.getWidth(), prevX, 5));
         spnY.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(-(int) canvas.getHeight(), (int) canvas.getHeight(), prevY, 5));
         spnZoom.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0.01, 1000, prevZoom, 0.03));

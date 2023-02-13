@@ -27,13 +27,6 @@
                                 <Insets/>
                             </GridPane.margin>
                         </Button>
-                        <Button fx:id="btnBack" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0"
-                                prefWidth="50.0" text="Back" textAlignment="CENTER" GridPane.halignment="CENTER"
-                                GridPane.valignment="CENTER">
-                            <GridPane.margin>
-                                <Insets/>
-                            </GridPane.margin>
-                        </Button>
                         <Button fx:id="btnHome" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0"
                                 prefWidth="50.0" text="Home" textAlignment="CENTER" GridPane.columnIndex="1"
                                 GridPane.halignment="CENTER" GridPane.valignment="CENTER">

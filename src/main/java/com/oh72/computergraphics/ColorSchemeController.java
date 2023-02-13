@@ -30,8 +30,6 @@ import java.util.List;
  **/
 public class ColorSchemeController {
     @FXML
-    private Button btnBack;
-    @FXML
     private Button btnHome;
     @FXML
     private Button btnHelp;
@@ -59,6 +57,8 @@ public class ColorSchemeController {
 
     @FXML
     public void initialize() {
+        btnHome.setOnMouseReleased(MainMenuController.HOME);
+
         image = new Image("default_image.png");
         imageView.setImage(image);
         recalculatePixels();

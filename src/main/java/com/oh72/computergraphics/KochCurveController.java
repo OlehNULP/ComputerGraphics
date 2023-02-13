@@ -25,8 +25,6 @@ import java.util.Objects;
  **/
 public class KochCurveController {
     @FXML
-    private Button btnBack;
-    @FXML
     private Button btnHome;
     @FXML
     private Button btnHelp;
@@ -54,6 +52,8 @@ public class KochCurveController {
 
     @FXML
     public void initialize() {
+        btnHome.setOnMouseReleased(MainMenuController.HOME);
+
         mode.getItems().addAll(Mode.values());
         mode.setValue(Mode.DYNAMIC);
         btnStart.setOnMouseReleased(mouseEvent -> dynamic());

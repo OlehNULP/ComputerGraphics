@@ -5,17 +5,15 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.awt.image.RenderedImage;
-import java.io.*;
 import javax.imageio.ImageIO;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,8 +25,6 @@ import java.util.Objects;
  * @since 08/11/2022
  **/
 public class DragonCurveController {
-    @FXML
-    private Button btnBack;
     @FXML
     private Button btnHome;
     @FXML
@@ -56,6 +52,8 @@ public class DragonCurveController {
 
     @FXML
     public void initialize() {
+        btnHome.setOnMouseReleased(MainMenuController.HOME);
+
         mode.getItems().addAll(Mode.values());
         mode.setValue(Mode.DYNAMIC);
         btnStart.setOnMouseReleased(mouseEvent -> dynamic());

@@ -4,9 +4,12 @@ import javafx.beans.InvalidationListener;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -59,6 +62,24 @@ public class TriangleMovementController {
     @FXML
     public void initialize() {
         btnHome.setOnMouseReleased(MainMenuController.HOME);
+        btnHelp.setOnMouseReleased(mouseEvent -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Image image = new Image("triangle-movement.png");
+            ImageView imageView = new ImageView(image);
+            imageView.setPreserveRatio(true);
+            imageView.setFitWidth(500);
+            alert.setGraphic(imageView);
+            alert.setTitle("Інформація");
+            alert.setContentText("Афінним називається перетворення, що має такі властивостями:\n" +
+                    "● будь-яке афінне перетворення може бути представлене як послідовність операцій з числа найпростіших: зсув, розтягнення/стиснення, поворот;\n" +
+                    "● зберігаються прямі лінії, паралельність прямих, відношення довжин відрізків, що лежать на одній прямій, і відношення площ фігур.\n" +
+                    "\n" +
+                    "Афінні перетворення координат на площині:\n" +
+                    "(X, Y) – двовимірна система координат,\n" +
+                    "(x, y) – координати старої системи в новій системі координат.");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        });
 
         spnX.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(-(int) canvas.getWidth(), (int) canvas.getWidth(), prevX, 5));
         spnY.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(-(int) canvas.getHeight(), (int) canvas.getHeight(), prevY, 5));

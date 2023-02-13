@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -53,6 +55,26 @@ public class DragonCurveController {
     @FXML
     public void initialize() {
         btnHome.setOnMouseReleased(MainMenuController.HOME);
+        btnHelp.setOnMouseReleased(mouseEvent -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Image image = new Image("dragon-fractal.png");
+            ImageView imageView = new ImageView(image);
+            imageView.setPreserveRatio(true);
+            imageView.setFitWidth(500);
+            alert.setGraphic(imageView);
+            alert.setTitle("Інформація");
+            alert.setContentText("Кожна ламана–“дракон” є лише наближенням до фракталу-“дракона” та складається з " +
+                    "відрізків. Ламана з номером n складатиметься з 2n відрізків. Довжина кожного дорівнює  , де d – довжина" +
+                    " вихідного відрізка. Якщо відрізки пронумерувати числами 0, 1, 2, ... і йти по ламаній, то після кожного " +
+                    "відрізка потрібно здійснювати поворот. Напрямок повороту визначається номером k поточного відрізка:\n\n" +
+                    " повернути праворуч, якщо k дає залишок 1 від ділення на 4;\n" +
+                    "\n" +
+                    "повернути ліворуч, якщо k дає залишок 3 від ділення на 4;\n" +
+                    "\n" +
+                    "овертати так, як після відрізка з номером k/2, якщо k парне.");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        });
 
         mode.getItems().addAll(Mode.values());
         mode.setValue(Mode.DYNAMIC);

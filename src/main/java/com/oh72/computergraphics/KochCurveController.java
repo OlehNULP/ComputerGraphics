@@ -4,6 +4,8 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -53,6 +55,18 @@ public class KochCurveController {
     @FXML
     public void initialize() {
         btnHome.setOnMouseReleased(MainMenuController.HOME);
+        btnHelp.setOnMouseReleased(mouseEvent -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Image image = new Image("koch-fractal.png");
+            ImageView imageView = new ImageView(image);
+            imageView.setPreserveRatio(true);
+            imageView.setFitWidth(500);
+            alert.setGraphic(imageView);
+            alert.setTitle("Інформація");
+            alert.setContentText("Побудова кривої починається з відрізка одиничної довжини – це 0-е покоління кривої Коха. Для отримання кожного подальшого покоління, всі ланки попереднього покоління необхідно замінити зменшеним утворюючим елементом. Крива n-го покоління при будь-якому кінцевому n називається передфракталом. При n, прямуючому до нескінченності, крива Коха стає фрактальним об’єктом.");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        });
 
         mode.getItems().addAll(Mode.values());
         mode.setValue(Mode.DYNAMIC);

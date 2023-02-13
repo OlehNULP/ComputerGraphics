@@ -58,6 +58,28 @@ public class ColorSchemeController {
     @FXML
     public void initialize() {
         btnHome.setOnMouseReleased(MainMenuController.HOME);
+        btnHelp.setOnMouseReleased(mouseEvent -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Image image = new Image("color-scheme.png");
+            ImageView imageView = new ImageView(image);
+            imageView.setPreserveRatio(true);
+            imageView.setFitWidth(500);
+            alert.setGraphic(imageView);
+            alert.setTitle("Інформація");
+            alert.setContentText("HSL означає відтінок, насиченість та світлість та є циліндричним представленням моделі кольору RGB. Для конвертації кольору RGB в HSL ви можете використовувати наступні кроки:\n" +
+                    "\n" +
+                    "Нормалізація значення RGB: масштабуйте значення RGB в діапазон [0, 1], поділивши кожне значення на 255.\n" +
+                    "\n" +
+                    "Розрахуйте мінімальне та максимальне значення RGB: назвемо значення червоного, зеленого та синього R, G, та B відповідно. Мінімальне значення дорівнює min(R, G, B), а максимальне значення дорівнює max(R, G, B).\n" +
+                    "\n" +
+                    "Розрахуйте світлість: значення світлості дорівнює (max + min) / 2.\n" +
+                    "\n" +
+                    "Розрахуйте насиченість: значення насиченості дорівнює (max - min) / (1 - abs(2 * lightness - 1)) якщо світлість менше 0.5, або (max - min) / (2 * lightness - 1) якщо світлість більше або дорівнює 0.5.\n" +
+                    "\n" +
+                    "Обчисліть відтінок: якщо max = r, значення відтінку становить (g - b) / (max - min). Якщо max = g, значення відтінку становить 2 + (b - r) / (max - min). Якщо max = b, значення відтінку - 4 + (r - g) / (max - min). Тоді значення відтінку потрібно маштабувати до діапазону [0, 360].");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        });
 
         image = new Image("default_image.png");
         imageView.setImage(image);

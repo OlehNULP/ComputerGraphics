@@ -19,6 +19,10 @@ public class PickFractalController {
     private Button dragonCurve;
     @FXML
     private Button kochCurve;
+    @FXML
+    private Button colorScheme;
+    @FXML
+    private Button triangle;
 
     @FXML
     public void initialize() {
@@ -32,7 +36,7 @@ public class PickFractalController {
                 stage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT));
                 stage.show();
                 // Hide this current window (if this is what you want)
-                ((Node)(event.getSource())).getScene().getWindow().hide();
+                ((Node) (event.getSource())).getScene().getWindow().hide();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -48,7 +52,39 @@ public class PickFractalController {
                 stage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT));
                 stage.show();
                 // Hide this current window (if this is what you want)
-                ((Node)(event.getSource())).getScene().getWindow().hide();
+                ((Node) (event.getSource())).getScene().getWindow().hide();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        colorScheme.setOnMouseReleased(event -> {
+            Parent root;
+
+            try {
+                root = FXMLLoader.load(Objects.requireNonNull(PickFractalController.class.getResource("color-scheme-view.fxml")));
+                Stage stage = new Stage();
+                stage.setTitle("Color Scheme");
+                stage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT));
+                stage.show();
+                // Hide this current window (if this is what you want)
+                ((Node) (event.getSource())).getScene().getWindow().hide();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        triangle.setOnMouseReleased(event -> {
+            Parent root;
+
+            try {
+                root = FXMLLoader.load(Objects.requireNonNull(PickFractalController.class.getResource("triangle-movement-view.fxml")));
+                Stage stage = new Stage();
+                stage.setTitle("Triangle Movement");
+                stage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT));
+                stage.show();
+                // Hide this current window (if this is what you want)
+                ((Node) (event.getSource())).getScene().getWindow().hide();
             } catch (IOException e) {
                 e.printStackTrace();
             }

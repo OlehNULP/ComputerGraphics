@@ -13,8 +13,8 @@ public class CGApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(CGApplication.class.getResource("triangle-movement-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), WINDOW_WIDTH, WINDOW_HEIGHT);
+        FXMLLoader fxmlLoader = new FXMLLoader(CGApplication.class.getResource("pick-fractal-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 400, 200);
         stage.setTitle("Computer Graphics");
         stage.setScene(scene);
         stage.setResizable(Boolean.FALSE);

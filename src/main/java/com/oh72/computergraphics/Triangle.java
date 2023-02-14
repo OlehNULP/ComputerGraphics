@@ -3,11 +3,6 @@ package com.oh72.computergraphics;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-/**
- * @author Oleh Hembarovskyi
- * @link oleh.hembarovskyi@embrox.com
- * @since 13/02/2023
- **/
 public class Triangle {
     private final Coordinate[] initPoints;
     private final double[][] translateMatrix = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
@@ -82,8 +77,8 @@ public class Triangle {
     }
 
     private void zoomTranslate(Coordinate[] points, double x, double y) {
-        for (int i = 0; i < points.length; i++) {
-            points[i].setLocation(points[i].getX() + x, points[i].getY() + y);
+        for (Coordinate point : points) {
+            point.setLocation(point.getX() + x, point.getY() + y);
         }
     }
 

@@ -61,7 +61,13 @@ public class TriangleMovementController {
 
     @FXML
     public void initialize() {
+        Image img = new Image("home.png");
+        ImageView view = new ImageView(img);
+        view.setFitHeight(30);
+        view.setPreserveRatio(true);
         btnHome.setOnMouseReleased(MainMenuController.HOME);
+        btnHome.setGraphic(view);
+        btnHome.setText("");
         btnHelp.setOnMouseReleased(mouseEvent -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             Image image = new Image("triangle-movement.png");
@@ -156,7 +162,7 @@ public class TriangleMovementController {
         if (outOfCanvas) {
             g.setStroke(Color.DEEPPINK);
             g.setFont(new Font("System Regular", 35));
-            g.strokeText("The shapes should not go out of the canvas boundaries)", 125, canvas.getHeight() / 2 - 50);
+            g.strokeText("Трикутник вийшов за межі, дія була повернута, все добре)", 55, canvas.getHeight() / 2 - 50);
         }
     }
 

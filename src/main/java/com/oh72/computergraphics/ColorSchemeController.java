@@ -57,7 +57,13 @@ public class ColorSchemeController {
 
     @FXML
     public void initialize() {
+        Image img = new Image("home.png");
+        ImageView view = new ImageView(img);
+        view.setFitHeight(30);
+        view.setPreserveRatio(true);
         btnHome.setOnMouseReleased(MainMenuController.HOME);
+        btnHome.setGraphic(view);
+        btnHome.setText("");
         btnHelp.setOnMouseReleased(mouseEvent -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             Image image = new Image("color-scheme.png");
